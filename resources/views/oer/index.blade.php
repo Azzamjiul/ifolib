@@ -12,8 +12,8 @@
             </div>
             <div class="col-md-4 order-1 order-md-2 align-self-center">
                 <ul class="breadcrumb d-block text-md-right">
-                    <li><a href="demo-education.html">Home</a></li>
-                    <li class="active text-color-light">Blog</li>
+                    <li><a href="/">Home</a></li>
+                    <li class="active text-color-light">OER</li>
                 </ul>
             </div>
         </div>
@@ -25,7 +25,7 @@
         <div class="row justify-content-center">
             <div class="col-md-10 text-center">
                 <h2 class="font-weight-bold mb-4 appear-animation" data-appear-animation="fadeInUpShorter" data-appear-animation-delay="1500">Selamat Datang</h2>
-                <p class="text-color-dark pb-3 mb-4 appear-animation" data-appear-animation="fadeInUpShorter" data-appear-animation-delay="1700">Portal Open Educational Resource (OER) Informatika Institut Teknologi Sepuluh Nopember merupakan kumpulan buku digital berlisensi Creative Commons yang dikumpulkan dari berbagai sumber untuk mendukung perkembangan ilmu kepengetahuan. Anda juga dapat berpartisipasi menambah koleksi tersebut melalui menu "Contribute an Item". Koleksi dapat berupa text book, slide presentasi atau video. </p>
+                <p class="text-color-dark pb-3 mb-4 appear-animation" data-appear-animation="fadeInUpShorter" data-appear-animation-delay="1700">Portal Open Educational Resource (OER) Informatika Institut Teknologi Sepuluh Nopember merupakan kumpulan buku digital berlisensi Creative Commons yang dikumpulkan dari berbagai sumber untuk mendukung perkembangan ilmu kepengetahuan.</p>
             </div>
         </div>
     </div>

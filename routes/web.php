@@ -18,3 +18,10 @@ Route::get('/', function () {
 // frontend oer
 Route::get('oer', 'OerController@index')->name('oer.index');
 Route::get('oer/search', 'OerController@search')->name('oer.search');
+
+Route::get('article', 'ArticleController@index');
+Route::get('article/{tag}', 'ArticleController@cari');
+Route::post('article', 'ArticleController@store');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
