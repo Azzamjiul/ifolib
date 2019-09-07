@@ -11,11 +11,10 @@
 |
 */
 
-use Spatie\Analytics\Period;
-
 Route::get('/', function () {
-    //retrieve visitors and pageviews since the 6 months ago
-    $analyticsData = NULL;// Analytics::fetchVisitorsAndPageViews(Period::days(7));
-    // return $analyticsData;
-    return view('home',compact('analyticsData'));
+    return view('home');
 });
+
+// frontend oer
+Route::get('oer', 'OerController@index')->name('oer.index');
+Route::get('oer/search', 'OerController@search')->name('oer.search');
