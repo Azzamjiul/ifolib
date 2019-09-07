@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('front_end.layouts.master')
 
 @section('title','OER - Open Education Resource')
 

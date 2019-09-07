@@ -8,7 +8,7 @@ use DB;
 class OerController extends Controller
 {
    public function index(){
-       return view('oer.index');
+       return view('front_end.oer.index');
    }
 
    public function search(Request $request)
@@ -19,6 +19,6 @@ class OerController extends Controller
                 ->orWhere('batch', 'like', "%{$request->keyword}%");
         })->get();
         return $items;
-        return view('oer.search', compact('items'));
+        return view('front_end.oer.search', compact('items'));
    }
 }

@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('front_end.layouts.master')
 
 @section('title','IFOLIB - Informatic Open Library')
 
