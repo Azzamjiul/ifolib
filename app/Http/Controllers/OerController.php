@@ -21,4 +21,8 @@ class OerController extends Controller
         return $items;
         return view('front_end.oer.search', compact('items'));
    }
+
+   public function dashboard(){
+       return view('admin.dashboard.index');
+   }
 }
