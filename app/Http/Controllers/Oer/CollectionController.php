@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Oer;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Collection;
 
 class CollectionController extends Controller
 {
@@ -14,7 +15,9 @@ class CollectionController extends Controller
      */
     public function index()
     {
-        //
+        $collections = Collection::orderBy('code', 'ASC')->get();
+        // return $collections;
+        return view('admin.koleksi.index',compact('collections'));
     }
 
     /**
@@ -24,7 +27,7 @@ class CollectionController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.koleksi.create');
     }
 
     /**
@@ -35,7 +38,21 @@ class CollectionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // return $request;
+        $request->validate([
+            'code' => 'required|unique:collections|max:255',
+            'name' => 'required',
+            'description' => ''
+        ]);
+
+        Collection::create([
+            'parent_id' => $request->parent_id,
+            'code' => $request->code,
+            'name' => $request->name,
+            'description' => $request->description
+        ]);
+
+        return redirect()->route('admin.koleksi.index')->with('status', 'Koleksi berhasil ditambahkan');
     }
 
     /**
@@ -57,7 +74,8 @@ class CollectionController extends Controller
      */
     public function edit($id)
     {
-        //
+        $collection = Collection::find($id);
+        return view('admin.koleksi.edit', compact('collection'));
     }
 
     /**
@@ -69,7 +87,15 @@ class CollectionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $collection = Collection::find($id);
+        $collection->update([
+            'parent_id' =>  $request->parent_id,
+            'code'  => $request->code,
+            'name'  =>  $request->name,
+            'description'   => $request->description
+        ]);
+        $collection->save();
+        return redirect()->route('admin.oer.koleksi.index')->with('message-success', 'Koleksi berhasil diupdate');
     }
 
     /**

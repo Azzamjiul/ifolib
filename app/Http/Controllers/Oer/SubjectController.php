@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Oer;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Subject;
 
 class SubjectController extends Controller
 {
@@ -14,7 +15,8 @@ class SubjectController extends Controller
      */
     public function index()
     {
-        //
+        $subjects = Subject::all();
+        return view('admin.subject.index', compact('subjects'));
     }
 
     /**
@@ -24,7 +26,7 @@ class SubjectController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.subject.create');
     }
 
     /**
@@ -35,7 +37,12 @@ class SubjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Subject::create([
+            'name' => $request->name,
+            'description' => $request->description
+        ]);
+
+        return redirect()->route('admin.oer.subject.index')->with('status', 'Mata pelajaran berhasil ditambahkan');
     }
 
     /**
@@ -57,7 +64,8 @@ class SubjectController extends Controller
      */
     public function edit($id)
     {
-        //
+        $subject = Subject::find($id);
+        return view('admin.subject.edit', compact('subject'));
     }
 
     /**
@@ -69,7 +77,13 @@ class SubjectController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $subject = Subject::find($id);
+        $subject->update([
+            'name'  => $request->name,
+            'description'   => $request->description
+        ]);
+        $subject->save();
+        return redirect()->route('admin.oer.subject.index')->with('status', 'Mata pelajaran berhasil diperbarui');
     }
 
     /**

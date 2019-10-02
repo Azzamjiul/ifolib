@@ -15,22 +15,24 @@ Route::get('/', function () {
     return view('front_end.home');
 });
 
+Auth::routes();
+Route::get('/home', 'HomeController@index')->name('home');
+
 // oer
 Route::prefix('oer')->group(function () {
     // front end
-    Route::get('', 'OerController@index')->name('oer.index');
-    Route::get('search', 'OerController@search')->name('oer.search');
+    Route::get('', 'Oer\OerController@index')->name('oer.index');
+    Route::get('search', 'Oer\OerController@search')->name('oer.search');
 
     // admin
-    Route::prefix('admin')->name('admin.')->group(function () {
-        Route::get('', 'OerController@dashboard')->name('dashboard');
-        Route::resource('resources', 'ResourceController');
+    Route::prefix('admin')->name('admin.oer.')->middleware('auth')->group(function () {
+        Route::get('', 'Oer\OerController@dashboard')->name('dashboard');
+        Route::resource('koleksi', 'Oer\CollectionController');
+        Route::resource('subject', 'Oer\SubjectController');
+        Route::resource('resource', 'Oer\ResourceController');
     });
 });
 
 Route::get('article', 'ArticleController@index');
 Route::get('article/{tag}', 'ArticleController@cari');
 Route::post('article', 'ArticleController@store');
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');

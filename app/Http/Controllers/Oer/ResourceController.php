@@ -4,6 +4,10 @@ namespace App\Http\Controllers\Oer;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Resource;
+use App\Subject;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class ResourceController extends Controller
 {
@@ -14,7 +18,8 @@ class ResourceController extends Controller
      */
     public function index()
     {
-        //
+        $resources = Resource::all();
+        return view('admin.resources.index', compact('resources'));
     }
 
     /**
@@ -24,7 +29,8 @@ class ResourceController extends Controller
      */
     public function create()
     {
-        //
+        $subjects = Subject::all();
+        return view('admin.resources.create', compact('subjects'));
     }
 
     /**
@@ -35,7 +41,27 @@ class ResourceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // return $request;
+        Resource::create([
+            'title' => $request->title,
+            'subject_id'    =>  $request->subject_id,
+            'description'   =>  $request->description,
+            'creator'   => $request->creator,
+            'source'    => $request->source,
+            'publisher' => $request->publisher,
+            'date'  => Carbon::now(),
+            'contributor_id'    => Auth::user()->id,
+            'rights'    => $request->rights,
+            'format'    => $request->format,
+            'language'  => $request->language,
+            'type_id'   => $request->type_id,
+            'file'      => $request->file,
+            'image'     => $request->image,
+            'collection_id' => $request->collection_id,
+            'citation'  => null
+        ]);
+
+        return redirect()->route('admin.oer.resource.index')->with('status','Resource Berhasil ditambahkan');
     }
 
     /**
@@ -57,7 +83,7 @@ class ResourceController extends Controller
      */
     public function edit($id)
     {
-        //
+        return $id;
     }
 
     /**

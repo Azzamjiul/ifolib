@@ -473,7 +473,7 @@
                     <div class="content-side content-side-full">
                         <ul class="nav-main">
                             <li>
-                                <a class="active" href="{{route('admin.dashboard')}}"><i class="si si-cup"></i><span class="sidebar-mini-hide">Dashboard</span></a>
+                                <a class="active" href="{{route('admin.oer.dashboard')}}"><i class="si si-cup"></i><span class="sidebar-mini-hide">Dashboard</span></a>
                             </li>
                             <!-- <li>
                                 <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-badge"></i><span class="sidebar-mini-hide">Page Kits</span></a>
@@ -651,7 +651,7 @@
                                 <a class="nav-submenu" data-toggle="nav-submenu" href="#"><i class="si si-puzzle"></i><span class="sidebar-mini-hide">OER Management</span></a>
                                 <ul>
                                     <li>
-                                        <a href="{{route('admin.resources.index')}}">Resources</a>
+                                        <a href="{{route('admin.oer.resource.index')}}">Resources</a>
                                     </li>
                                     <li>
                                         <a href="be_blocks_tiles.html">Collections</a>
