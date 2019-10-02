@@ -24,36 +24,36 @@
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700" rel="stylesheet" type="text/css">
 
 	<!-- Vendor CSS -->
-	<link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
-	<link rel="stylesheet" href="vendor/fontawesome-free/css/all.min.css">
-	<link rel="stylesheet" href="vendor/animate/animate.min.css">
-	<link rel="stylesheet" href="vendor/simple-line-icons/css/simple-line-icons.min.css">
-	<link rel="stylesheet" href="vendor/owl.carousel/assets/owl.carousel.min.css">
-	<link rel="stylesheet" href="vendor/owl.carousel/assets/owl.theme.default.min.css">
-	<link rel="stylesheet" href="vendor/magnific-popup/magnific-popup.min.css">
+	<link rel="stylesheet" href="{{asset('')}}vendor/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="{{asset('')}}vendor/fontawesome-free/css/all.min.css">
+	<link rel="stylesheet" href="{{asset('')}}vendor/animate/animate.min.css">
+	<link rel="stylesheet" href="{{asset('')}}vendor/simple-line-icons/css/simple-line-icons.min.css">
+	<link rel="stylesheet" href="{{asset('')}}vendor/owl.carousel/assets/owl.carousel.min.css">
+	<link rel="stylesheet" href="{{asset('')}}vendor/owl.carousel/assets/owl.theme.default.min.css">
+	<link rel="stylesheet" href="{{asset('')}}vendor/magnific-popup/magnific-popup.min.css">
 
 	<!-- Theme CSS -->
-	<link rel="stylesheet" href="css/theme.css">
-	<link rel="stylesheet" href="css/theme-elements.css">
-	<link rel="stylesheet" href="css/theme-blog.css">
-	<link rel="stylesheet" href="css/theme-shop.css">
+	<link rel="stylesheet" href="{{asset('')}}css/theme.css">
+	<link rel="stylesheet" href="{{asset('')}}css/theme-elements.css">
+	<link rel="stylesheet" href="{{asset('')}}css/theme-blog.css">
+	<link rel="stylesheet" href="{{asset('')}}css/theme-shop.css">
 
 	<!-- Current Page CSS -->
-	<link rel="stylesheet" href="vendor/rs-plugin/css/settings.css">
-	<link rel="stylesheet" href="vendor/rs-plugin/css/layers.css">
-	<link rel="stylesheet" href="vendor/rs-plugin/css/navigation.css">
+	<link rel="stylesheet" href="{{asset('')}}vendor/rs-plugin/css/settings.css">
+	<link rel="stylesheet" href="{{asset('')}}vendor/rs-plugin/css/layers.css">
+	<link rel="stylesheet" href="{{asset('')}}vendor/rs-plugin/css/navigation.css">
 
 	<!-- Demo CSS -->
-	<link rel="stylesheet" href="css/demos/demo-education.css">
+	<link rel="stylesheet" href="{{asset('')}}css/demos/demo-education.css">
 
 	<!-- Skin CSS -->
-	<link rel="stylesheet" href="css/skins/skin-education.css">
+	<link rel="stylesheet" href="{{asset('')}}css/skins/skin-education.css">
 
 	<!-- Theme Custom CSS -->
-	<link rel="stylesheet" href="css/custom.css">
+	<link rel="stylesheet" href="{{asset('')}}css/custom.css">
 
 	<!-- Head Libs -->
-	<script src="vendor/modernizr/modernizr.min.js"></script>
+	<script src="{{asset('')}}vendor/modernizr/modernizr.min.js"></script>
 
 </head>
 
@@ -298,42 +298,42 @@
 	</div>
 
 	<!-- Vendor -->
-	<script src="vendor/jquery/jquery.min.js"></script>
-	<script src="vendor/jquery.appear/jquery.appear.min.js"></script>
-	<script src="vendor/jquery.easing/jquery.easing.min.js"></script>
-	<script src="vendor/jquery.cookie/jquery.cookie.min.js"></script>
-	<script src="vendor/popper/umd/popper.min.js"></script>
-	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-	<script src="vendor/common/common.min.js"></script>
-	<script src="vendor/jquery.validation/jquery.validate.min.js"></script>
-	<script src="vendor/jquery.easy-pie-chart/jquery.easypiechart.min.js"></script>
-	<script src="vendor/jquery.gmap/jquery.gmap.min.js"></script>
-	<script src="vendor/jquery.lazyload/jquery.lazyload.min.js"></script>
-	<script src="vendor/isotope/jquery.isotope.min.js"></script>
-	<script src="vendor/owl.carousel/owl.carousel.min.js"></script>
-	<script src="vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
-	<script src="vendor/vide/jquery.vide.min.js"></script>
-	<script src="vendor/vivus/vivus.min.js"></script>
-	<script src="vendor/jquery.countdown/jquery.countdown.min.js"></script>
+	<script src="{{asset('')}}vendor/jquery/jquery.min.js"></script>
+	<script src="{{asset('')}}vendor/jquery.appear/jquery.appear.min.js"></script>
+	<script src="{{asset('')}}vendor/jquery.easing/jquery.easing.min.js"></script>
+	<script src="{{asset('')}}vendor/jquery.cookie/jquery.cookie.min.js"></script>
+	<script src="{{asset('')}}vendor/popper/umd/popper.min.js"></script>
+	<script src="{{asset('')}}vendor/bootstrap/js/bootstrap.min.js"></script>
+	<script src="{{asset('')}}vendor/common/common.min.js"></script>
+	<script src="{{asset('')}}vendor/jquery.validation/jquery.validate.min.js"></script>
+	<script src="{{asset('')}}vendor/jquery.easy-pie-chart/jquery.easypiechart.min.js"></script>
+	<script src="{{asset('')}}vendor/jquery.gmap/jquery.gmap.min.js"></script>
+	<script src="{{asset('')}}vendor/jquery.lazyload/jquery.lazyload.min.js"></script>
+	<script src="{{asset('')}}vendor/isotope/jquery.isotope.min.js"></script>
+	<script src="{{asset('')}}vendor/owl.carousel/owl.carousel.min.js"></script>
+	<script src="{{asset('')}}vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+	<script src="{{asset('')}}vendor/vide/jquery.vide.min.js"></script>
+	<script src="{{asset('')}}vendor/vivus/vivus.min.js"></script>
+	<script src="{{asset('')}}vendor/jquery.countdown/jquery.countdown.min.js"></script>
 
 	<!-- Theme Base, Components and Settings -->
-	<script src="js/theme.js"></script>
+	<script src="{{asset('')}}js/theme.js"></script>
 
 	<!-- Current Page Vendor and Views -->
-	<script src="vendor/rs-plugin/js/jquery.themepunch.tools.min.js"></script>
-	<script src="vendor/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
+	<script src="{{asset('')}}vendor/rs-plugin/js/jquery.themepunch.tools.min.js"></script>
+	<script src="{{asset('')}}vendor/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
 
 	<!-- Current Page Vendor and Views -->
-	<script src="js/views/view.contact.js"></script>
+	<script src="{{asset('')}}js/views/view.contact.js"></script>
 
 	<!-- Demo -->
-	<script src="js/demos/demo-education.js"></script>
+	<script src="{{asset('')}}js/demos/demo-education.js"></script>
 
 	<!-- Theme Custom -->
-	<script src="js/custom.js"></script>
+	<script src="{{asset('')}}js/custom.js"></script>
 
 	<!-- Theme Initialization Files -->
-	<script src="js/theme.init.js"></script>
+	<script src="{{asset('')}}js/theme.init.js"></script>
 
 	<!-- Google Analytics: Change UA-XXXXX-X to be your site's ID. Go to http://www.google.com/analytics/ for more information. -->
 	<script>

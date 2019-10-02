@@ -52,7 +52,7 @@ class CollectionController extends Controller
             'description' => $request->description
         ]);
 
-        return redirect()->route('admin.koleksi.index')->with('status', 'Koleksi berhasil ditambahkan');
+        return redirect()->route('admin.oer.koleksi.index')->with('message-success', 'Koleksi berhasil ditambahkan');
     }
 
     /**
@@ -106,6 +106,13 @@ class CollectionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return $id;
+    }
+
+    public function delete($id)
+    {
+        $collection = Collection::find($id);
+        $collection->delete();
+        return redirect()->route('admin.oer.koleksi.index')->with('message-success', 'Koleksi berhasil dihapus');
     }
 }

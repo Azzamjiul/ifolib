@@ -28,8 +28,11 @@ Route::prefix('oer')->group(function () {
     Route::prefix('admin')->name('admin.oer.')->middleware('auth')->group(function () {
         Route::get('', 'Oer\OerController@dashboard')->name('dashboard');
         Route::resource('koleksi', 'Oer\CollectionController');
+        Route::get('koleksi/{id}/delete', 'Oer\CollectionController@delete')->name('koleksi.delete');
         Route::resource('subject', 'Oer\SubjectController');
+        Route::get('subject/{id}/delete', 'Oer\SubjectController@delete')->name('subject.delete');
         Route::resource('resource', 'Oer\ResourceController');
+        Route::get('resource/{id}/delete', 'Oer\ResourceController@delete')->name('resource.delete');
     });
 });
 

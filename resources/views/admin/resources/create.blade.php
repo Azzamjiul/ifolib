@@ -17,7 +17,7 @@
                     </div>
                     @endif
 
-                    <form action="{{ route('admin.oer.resource.store') }}" method="post">
+                    <form action="{{ route('admin.oer.resource.store') }}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group">
                             <label for="title">Judul Resource</label>
@@ -32,12 +32,40 @@
                         <div class="form-group">
                             <label for="subject_id">Mata Pelajaran</label>
                             <select name="subject_id" class="form-control @error('subject_id') is-invalid @enderror">
-                                <option value="1">wkwk</option>
+                                <!-- <option value="1">wkwk</option> -->
                                 @foreach($subjects as $subject)
-                                    <option value="{{$subject->id}}">{{$subject->name}}</option>
+                                <option value="{{$subject->id}}">{{$subject->name}}</option>
                                 @endforeach
                             </select>
                             @error('subject_id')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
+                            <label for="collection_id">Collections</label>
+                            <select name="collection_id" class="form-control @error('collection_id') is-invalid @enderror">
+                                @foreach($subjects as $subject)
+                                <option value="{{$subject->id}}">{{$subject->name}}</option>
+                                @endforeach
+                            </select>
+                            @error('collection_id')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
+                            <label for="type_id">Type</label>
+                            <select name="type_id" class="form-control @error('type_id') is-invalid @enderror">
+                                <option value=""></option>
+                                <option value="1">Pdf</option>
+                                <option value="2">Power Point</option>
+                            </select>
+                            @error('type_id')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
@@ -115,20 +143,9 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="type_id">Type</label>
-                            <select name="type_id" class="form-control @error('type_id') is-invalid @enderror">
-                                <option value="">Pdf</option>
-                            </select>
-                            @error('type_id')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
-
-                        <div class="form-group">
                             <label for="file">File</label>
-                            <input type="text" name="file" class="form-control @error('file') is-invalid @enderror" value="{{ old('file') }}">
+                            <br>
+                            <input type="file" name="file" class=" @error('file') is-invalid @enderror" value="{{ old('file') }}">
                             @error('file')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -138,22 +155,9 @@
 
                         <div class="form-group">
                             <label for="image">Foto Sampul</label>
-                            <input type="text" name="image" class="form-control @error('image') is-invalid @enderror" value="{{ old('image') }}">
+                            <br>
+                            <input type="file" name="image" class=" @error('image') is-invalid @enderror" value="{{ old('image') }}">
                             @error('image')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
-
-                        <div class="form-group">
-                            <label for="collection_id">Collections</label>
-                            <select name="collection_id" class="form-control @error('collection_id') is-invalid @enderror">
-                                @foreach($subjects as $subject)
-                                    <option value="{{$subject->id}}">{{$subject->name}}</option>
-                                @endforeach
-                            </select>
-                            @error('collection_id')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>

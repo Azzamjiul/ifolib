@@ -24,8 +24,8 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-10 text-center">
-                <h2 class="font-weight-bold mb-4 appear-animation" data-appear-animation="fadeInUpShorter" data-appear-animation-delay="1500">Selamat Datang</h2>
-                <p class="text-color-dark pb-3 mb-4 appear-animation" data-appear-animation="fadeInUpShorter" data-appear-animation-delay="1700">Portal Open Educational Resource (OER) Informatika Institut Teknologi Sepuluh Nopember merupakan kumpulan buku digital berlisensi Creative Commons yang dikumpulkan dari berbagai sumber untuk mendukung perkembangan ilmu kepengetahuan.</p>
+                <!-- <h2 class="font-weight-bold mb-4 appear-animation" data-appear-animation="fadeInUpShorter" data-appear-animation-delay="1500">Selamat Datang</h2> -->
+                <!-- <p class="text-color-dark pb-3 mb-4 appear-animation" data-appear-animation="fadeInUpShorter" data-appear-animation-delay="1700">Portal Open Educational Resource (OER) Informatika Institut Teknologi Sepuluh Nopember merupakan kumpulan buku digital berlisensi Creative Commons yang dikumpulkan dari berbagai sumber untuk mendukung perkembangan ilmu kepengetahuan.</p> -->
             </div>
         </div>
     </div>
@@ -48,7 +48,7 @@
         <br><br>
 
         <div class="row justify-content-center mb-5">
-            @for($i=0; $i < 0; $i++) 
+            @foreach($items as $item) 
             <div class="col-md-6 col-lg-3 mb-4 mb-lg-0 appear-animation" data-appear-animation="fadeInLeftShorter" data-appear-animation-delay="400">
                 <article class="thumb-info thumb-info-hide-wrapper-bg custom-thumb-info-style-1 h-100">
                     <div class="thumb-info-wrapper">
@@ -60,7 +60,7 @@
                     </div>
                 </article>
             </div>
-            @endfor
+            @endforeach
     </div>
     </div>
 </section>

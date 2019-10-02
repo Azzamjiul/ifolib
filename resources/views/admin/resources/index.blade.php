@@ -11,9 +11,9 @@
                 </div>
 
                 <div class="card-body">
-                    @if (session('status'))
+                    @if (session('message-success'))
                     <div class="alert alert-success" role="alert">
-                        {{ session('status') }}
+                        {{ session('message-success') }}
                     </div>
                     @endif
 
@@ -36,7 +36,7 @@
                                 <td>{{$resource->creator}}</td>
                                 <td>
                                     <a href="{{route('admin.oer.resource.edit', $resource->id)}}" class="float-center btn btn-warning btn-sm">Edit</a>
-                                    <a href="" class="float-center btn btn-danger btn-sm">Delete</a>
+                                    <a href="{{route('admin.oer.resource.delete', $resource->id)}}" class="float-center btn btn-danger btn-sm">Delete</a>
                                 </td>
                             </tr>
                             @endforeach

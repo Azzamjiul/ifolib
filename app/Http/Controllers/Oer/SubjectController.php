@@ -96,4 +96,11 @@ class SubjectController extends Controller
     {
         //
     }
+
+    public function delete($id)
+    {
+        $subject = Subject::find($id);
+        $subject->delete();
+        return redirect()->route('admin.oer.subject.index')->with('message-success', 'Mata Pelajaran berhasil dihapus');
+    }
 }

@@ -8,9 +8,15 @@ use App\Resource;
 use App\Subject;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use File;
 
 class ResourceController extends Controller
 {
+    public function __construct()
+    {
+        $this->path_resource_image = public_path('oer_upload/resource_image');
+        $this->path_resource_file = public_path('oer_upload/resource_file');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -42,7 +48,18 @@ class ResourceController extends Controller
     public function store(Request $request)
     {
         // return $request;
-        Resource::create([
+        // melakukan validasi
+        $this->validate($request, [
+            'title',
+            'type',
+            'creator',
+            'format',
+            'file' => 'required',
+            'image' => 'required'
+        ]);
+
+        // simpan tanpa gambar dan file
+        $resource = Resource::create([
             'title' => $request->title,
             'subject_id'    =>  $request->subject_id,
             'description'   =>  $request->description,
@@ -55,11 +72,37 @@ class ResourceController extends Controller
             'format'    => $request->format,
             'language'  => $request->language,
             'type_id'   => $request->type_id,
-            'file'      => $request->file,
-            'image'     => $request->image,
+            'file'      => null,
+            'image'     => null,
             'collection_id' => $request->collection_id,
             'citation'  => null
         ]);
+
+        $current_id = $resource->id;
+        // return $current_id;
+
+        // olah gambar dan file
+        $file = $request->file('file');
+        $fileExt = $file->getClientOriginalExtension();
+        $fileName = 'resource_' . $current_id . '.' . $fileExt;
+        $tujuan_file = $this->path_resource_file;
+        $file->move($tujuan_file,$fileName);
+
+        $image = $request->file('image');
+        $imageExt = $image->getClientOriginalExtension();
+        $imageName = 'image_' . $current_id . '.' . $imageExt;
+        $tujuan_image = $this->path_resource_image;
+        $image->move($tujuan_image,$imageName);
+
+
+        // update dengan gambar dan file
+        $resource_2 = Resource::find($current_id);
+        
+        $resource_2->update([
+            'file'  =>  $fileName,
+            'image' =>  $imageName
+        ]);
+        $resource->save();
 
         return redirect()->route('admin.oer.resource.index')->with('status','Resource Berhasil ditambahkan');
     }
@@ -107,5 +150,20 @@ class ResourceController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function delete($id)
+    {
+        $resource = Resource::find($id);
+        $file = $this->path_resource_file.'/'.$resource->file;
+        if(file_exists($file)){
+            File::delete($file);
+        }
+        $image = $this->path_resource_image.'/'.$resource->image;
+        if(file_exists($image)){
+            File::delete($image);
+        }
+        $resource->delete();
+        return redirect()->route('admin.oer.resource.index')->with('message-success', 'Resource berhasil dihapus');
     }
 }
