@@ -12,9 +12,30 @@
 */
 
 Route::get('/', function () {
-    return view('home');
+    return view('front_end.home');
 });
 
-// frontend oer
-Route::get('oer', 'OerController@index')->name('oer.index');
-Route::get('oer/search', 'OerController@search')->name('oer.search');
+Auth::routes();
+Route::get('/home', 'HomeController@index')->name('home');
+
+// oer
+Route::prefix('oer')->group(function () {
+    // front end
+    Route::get('', 'Oer\OerController@index')->name('oer.index');
+    Route::get('search', 'Oer\OerController@search')->name('oer.search');
+
+    // admin
+    Route::prefix('admin')->name('admin.oer.')->middleware('auth')->group(function () {
+        Route::get('', 'Oer\OerController@dashboard')->name('dashboard');
+        Route::resource('koleksi', 'Oer\CollectionController');
+        Route::get('koleksi/{id}/delete', 'Oer\CollectionController@delete')->name('koleksi.delete');
+        Route::resource('subject', 'Oer\SubjectController');
+        Route::get('subject/{id}/delete', 'Oer\SubjectController@delete')->name('subject.delete');
+        Route::resource('resource', 'Oer\ResourceController');
+        Route::get('resource/{id}/delete', 'Oer\ResourceController@delete')->name('resource.delete');
+    });
+});
+
+Route::get('article', 'ArticleController@index');
+Route::get('article/{tag}', 'ArticleController@cari');
+Route::post('article', 'ArticleController@store');
