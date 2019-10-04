@@ -48,20 +48,19 @@
         <br><br>
 
         <div class="row justify-content-center mb-5">
-            @for($i=0; $i < 0; $i++) 
-            <div class="col-md-6 col-lg-3 mb-4 mb-lg-0 appear-animation" data-appear-animation="fadeInLeftShorter" data-appear-animation-delay="400">
-                <article class="thumb-info thumb-info-hide-wrapper-bg custom-thumb-info-style-1 h-100">
+            @foreach($items as $item)
+            <div class="col-md-6 col-lg-4 col-xl-3 mb-4 pb-3 appear-animation" data-appear-animation="fadeInLeftShorter" data-appear-animation-delay="400">
+                <div class="thumb-info thumb-info-hide-wrapper-bg custom-thumb-info-style-1">
                     <div class="thumb-info-wrapper">
-                        <a href="demo-education-blog-detail.html"><img src="img/demos/education/news/news-1.jpg" class="img-fluid" alt=""></a>
+                        <a href="demo-education-courses-detail.html"><img src="{{asset('oer_upload/resource_image')}}/{{$item->image}}" class="img-fluid" alt=""></a>
                     </div>
                     <div class="thumb-info-caption">
-                        <span class="date d-block text-color-primary font-weight-semibold text-3 mb-3">22 FEB 2018</span>
-                        <h3 class="font-weight-semibold text-transform-none"><a href="demo-education-blog-detail.html" class="custom-link-color-dark">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In.</a></h3>
+                        <h3 class="font-weight-semibold text-transform-none"><a href="demo-education-courses-detail.html" class="custom-link-color-dark">{{$item->title}}</a></h3>
                     </div>
-                </article>
+                </div>
             </div>
-            @endfor
-    </div>
+            @endforeach
+        </div>
     </div>
 </section>
 @endsection

@@ -21,9 +21,10 @@ Route::get('/home', 'HomeController@index')->name('home');
 // oer
 Route::prefix('oer')->group(function () {
     // front end
-    Route::get('', 'Oer\OerController@index')->name('oer.index');
-    Route::get('search', 'Oer\OerController@search')->name('oer.search');
-
+    Route::name('oer.')->group(function(){
+        Route::get('', 'Oer\OerController@index')->name('index');
+        Route::get('search', 'Oer\OerController@search')->name('search');
+    });
     // admin
     Route::prefix('admin')->name('admin.oer.')->middleware('auth')->group(function () {
         Route::get('', 'Oer\OerController@dashboard')->name('dashboard');

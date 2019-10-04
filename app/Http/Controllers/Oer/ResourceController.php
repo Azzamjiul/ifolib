@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Oer;
 
+use App\Collection;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Resource;
@@ -86,25 +87,25 @@ class ResourceController extends Controller
         $fileExt = $file->getClientOriginalExtension();
         $fileName = 'resource_' . $current_id . '.' . $fileExt;
         $tujuan_file = $this->path_resource_file;
-        $file->move($tujuan_file,$fileName);
+        $file->move($tujuan_file, $fileName);
 
         $image = $request->file('image');
         $imageExt = $image->getClientOriginalExtension();
         $imageName = 'image_' . $current_id . '.' . $imageExt;
         $tujuan_image = $this->path_resource_image;
-        $image->move($tujuan_image,$imageName);
+        $image->move($tujuan_image, $imageName);
 
 
         // update dengan gambar dan file
         $resource_2 = Resource::find($current_id);
-        
+
         $resource_2->update([
             'file'  =>  $fileName,
             'image' =>  $imageName
         ]);
         $resource->save();
 
-        return redirect()->route('admin.oer.resource.index')->with('status','Resource Berhasil ditambahkan');
+        return redirect()->route('admin.oer.resource.index')->with('status', 'Resource Berhasil ditambahkan');
     }
 
     /**
@@ -126,7 +127,10 @@ class ResourceController extends Controller
      */
     public function edit($id)
     {
-        return $id;
+        $subjects = Subject::all();
+        $collections = Collection::all();
+        $resource = Resource::find($id);
+        return view('admin.resources.edit', compact('resource', 'subjects', 'collections'));
     }
 
     /**
@@ -138,7 +142,26 @@ class ResourceController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        return $id;
+        $resource = Resource::find($id);
+        $resource->update([
+            'title'             => $request->title,
+            'subject_id'        =>  $request->subject_id,
+            'description'       =>  $request->description,
+            'creator'           => $request->creator,
+            'source'            => $request->source,
+            'publisher'          => $request->publisher,
+            'date'              => Carbon::now(),
+            'contributor_id'    => Auth::user()->id,
+            'rights'            => $request->rights,
+            'format'            => $request->format,
+            'language'          => $request->language,
+            'type_id'           => $request->type_id,
+            'file'              => null,
+            'image'             => null,
+            'collection_id'     => $request->collection_id,
+            'citation'          => null
+        ]);
     }
 
     /**
@@ -155,12 +178,12 @@ class ResourceController extends Controller
     public function delete($id)
     {
         $resource = Resource::find($id);
-        $file = $this->path_resource_file.'/'.$resource->file;
-        if(file_exists($file)){
+        $file = $this->path_resource_file . '/' . $resource->file;
+        if (file_exists($file)) {
             File::delete($file);
         }
-        $image = $this->path_resource_image.'/'.$resource->image;
-        if(file_exists($image)){
+        $image = $this->path_resource_image . '/' . $resource->image;
+        if (file_exists($image)) {
             File::delete($image);
         }
         $resource->delete();
