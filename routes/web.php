@@ -24,6 +24,7 @@ Route::prefix('oer')->group(function () {
     Route::name('oer.')->group(function(){
         Route::get('', 'Oer\OerController@index')->name('index');
         Route::get('search', 'Oer\OerController@search')->name('search');
+        Route::get('show/{id}', 'Oer\OerController@show')->name('show');
     });
     // admin
     Route::prefix('admin')->name('admin.oer.')->middleware('auth')->group(function () {

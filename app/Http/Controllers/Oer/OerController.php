@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Oer;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\DB;
+use App\Resource;
 
 class OerController extends Controller
 {
@@ -23,12 +23,17 @@ class OerController extends Controller
                 ->orWhere('creator', 'like', "%{$request->keyword}%")
                 ->orWhere('publisher', 'like', "%{$request->keyword}%");
         })->get();
-        //  return $items;
         return view('front_end.oer.search_results', compact('items', 'request'));
     }
 
     public function dashboard()
     {
         return view('admin.dashboard.index');
+    }
+
+    public function show($id){
+        // return view('front_end.oer.resource_detail');
+        $resource = Resource::find($id);
+        return view('front_end.oer.resource_detail', compact('resource'));
     }
 }

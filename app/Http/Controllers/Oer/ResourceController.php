@@ -116,7 +116,7 @@ class ResourceController extends Controller
      */
     public function show($id)
     {
-        //
+        
     }
 
     /**

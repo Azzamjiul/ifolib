@@ -52,10 +52,10 @@
             <div class="col-md-6 col-lg-4 col-xl-3 mb-4 pb-3 appear-animation" data-appear-animation="fadeInLeftShorter" data-appear-animation-delay="400">
                 <div class="thumb-info thumb-info-hide-wrapper-bg custom-thumb-info-style-1">
                     <div class="thumb-info-wrapper">
-                        <a href="demo-education-courses-detail.html"><img src="{{asset('oer_upload/resource_image')}}/{{$item->image}}" class="img-fluid" alt=""></a>
+                        <a href="{{ route('oer.show', $item->id) }}"><img src="{{asset('oer_upload/resource_image')}}/{{$item->image}}" class="img-fluid" alt=""></a>
                     </div>
                     <div class="thumb-info-caption">
-                        <h3 class="font-weight-semibold text-transform-none"><a href="demo-education-courses-detail.html" class="custom-link-color-dark">{{$item->title}}</a></h3>
+                        <h3 class="font-weight-semibold text-transform-none"><a href="{{ route('oer.show', $item->id) }}" class="custom-link-color-dark">{{$item->title}}</a></h3>
                     </div>
                 </div>
             </div>
