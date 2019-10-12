@@ -16,16 +16,24 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('home')->middleware('administrator');
 
-// oer
+/**
+ * Open Education Resource
+ */
 Route::prefix('oer')->group(function () {
-    // front end
+    /**
+     * OER Front-End
+     */
     Route::get('', 'Oer\OerController@index')->name('oer.index');
     Route::get('search', 'Oer\OerController@search')->name('oer.search');
+    Route::get('resources/{id}', 'Oer\OerController@resources_show')->name('oer.resources.show');
+    Route::get('resources/{id}/view', 'Oer\OerController@resources_view')->name('oer.resources.view')->middleware('auth');
 
-    // admin
-    Route::prefix('admin')->name('admin.oer.')->middleware('auth')->group(function () {
+    /**
+     * OER Administrator
+     */
+    Route::prefix('admin')->name('admin.oer.')->middleware('administrator')->group(function () {
         Route::get('', 'Oer\OerController@dashboard')->name('dashboard');
         Route::resource('koleksi', 'Oer\CollectionController');
         Route::get('koleksi/{id}/delete', 'Oer\CollectionController@delete')->name('koleksi.delete');
@@ -34,8 +42,11 @@ Route::prefix('oer')->group(function () {
         Route::resource('resource', 'Oer\ResourceController');
         Route::get('resource/{id}/delete', 'Oer\ResourceController@delete')->name('resource.delete');
     });
-});
 
-Route::get('article', 'ArticleController@index');
-Route::get('article/{tag}', 'ArticleController@cari');
-Route::post('article', 'ArticleController@store');
+    /**
+     * OER Member
+     */
+    Route::prefix('member')->name('member.oer.')->middleware('auth')->group(function () {
+        Route::get('', 'Oer\MemberController@dashboard')->name('dashboard');
+    });
+});
