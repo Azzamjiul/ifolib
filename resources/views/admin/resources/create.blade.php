@@ -32,7 +32,7 @@
                         <div class="form-group">
                             <label for="subject_id">Mata Pelajaran</label>
                             <select name="subject_id" class="form-control @error('subject_id') is-invalid @enderror">
-                                <!-- <option value="1">wkwk</option> -->
+                                <option value="">Pilih Mata Pelajaran</option>
                                 @foreach($subjects as $subject)
                                 <option value="{{$subject->id}}">{{$subject->name}}</option>
                                 @endforeach
@@ -47,8 +47,9 @@
                         <div class="form-group">
                             <label for="collection_id">Collections</label>
                             <select name="collection_id" class="form-control @error('collection_id') is-invalid @enderror">
-                                @foreach($subjects as $subject)
-                                <option value="{{$subject->id}}">{{$subject->name}}</option>
+                                <option value="">Pilih Collection</option>
+                                @foreach($collections as $c)
+                                    <option value="{{$c->id}}">{{$c->code}} - {{$c->name}}</option>
                                 @endforeach
                             </select>
                             @error('collection_id')

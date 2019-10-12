@@ -1,6 +1,8 @@
 /node_modules
 /public/hot
 /public/storage
+/public/oer_upload/resource_file
+/public/oer_upload/resource_image
 /storage/*.key
 /vendor
 .env
