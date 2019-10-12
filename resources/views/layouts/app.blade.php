@@ -36,7 +36,7 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         @guest
-                        @else
+                        @elseif(Auth::user()->type==1)
                         <li class="nav-item">
                             <!-- <a class="nav-link" href="#">{{ __('Tipe') }}</a> -->
                         </li>

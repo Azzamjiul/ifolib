@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Resource;
 use App\Subject;
+use App\Collection;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use File;
@@ -36,7 +37,8 @@ class ResourceController extends Controller
     public function create()
     {
         $subjects = Subject::all();
-        return view('admin.resources.create', compact('subjects'));
+        $collections = Collection::all();
+        return view('admin.resources.create', compact('subjects','collections'));
     }
 
     /**
@@ -47,8 +49,9 @@ class ResourceController extends Controller
      */
     public function store(Request $request)
     {
-        // return $request;
-        // melakukan validasi
+        /**
+         * melakukan validasi
+         */
         $this->validate($request, [
             'title',
             'type',

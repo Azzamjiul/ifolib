@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Oer;
 
+use App\Resource;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
@@ -9,7 +10,6 @@ use Illuminate\Support\Facades\DB;
 class OerController extends Controller
 {
     public function index(){
-        // return "wkwk";
         return view('front_end.oer.index');
     }
  
@@ -22,11 +22,23 @@ class OerController extends Controller
                 ->orWhere('creator', 'like', "%{$request->keyword}%")
                 ->orWhere('publisher', 'like', "%{$request->keyword}%");
          })->get();
-        //  return $items;
-         return view('front_end.oer.index', compact('items'));
+         $keyword = $request->keyword;
+         return view('front_end.oer.search_results', compact('items', 'keyword'));
     }
  
     public function dashboard(){
         return view('admin.dashboard.index');
+    }
+
+    public function resources_show($id)
+    {
+        $resource = Resource::find($id);
+        return view('front_end.oer.resources_show', compact('resource'));
+    }
+
+    public function resources_view($id){
+        $resource = Resource::find($id);
+        $pathToFile = public_path('oer_upload/resource_file') . "/" .$resource->file;
+        return response()->file($pathToFile);
     }
 }

@@ -6,7 +6,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h3 style="display:inline-block">Mengubah Koleksi</h3>
+                    <h3 style="display:inline-block">Menambah Koleksi</h3>
                     <a href="{{route('admin.oer.koleksi.index')}}" class="float-right btn btn-warning btn-sm">Kembali</a>
                 </div>
 
@@ -17,18 +17,20 @@
                     </div>
                     @endif
 
-                    <form action="{{ route('admin.oer.koleksi.update', $collection->id) }}" method="post">
+                    <form action="{{ route('admin.oer.koleksi.store') }}" method="post">
                         @csrf
-                        @method('PUT')
                         <div class="form-group">
                             <label for="">Kategori Induk</label>
                             <select name="parent_id" id="" class="form-control">
-                                <option value="0">Induk</option>
+                                <option value="0">Kategori Induk</option>
+                                @foreach($collections as $c)
+                                <option value="{{$c->id}}">{{$c->code}} - {{$c->name}}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="form-group">
                             <label for="code">Nomor Koleksi</label>
-                            <input type="text" name="code" class="form-control @error('code') is-invalid @enderror" value="{{ $collection->code }}">
+                            <input type="text" name="code" class="form-control @error('code') is-invalid @enderror" value="{{ old('code') }}">
                             @error('code')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -37,7 +39,7 @@
                         </div>
                         <div class="form-group">
                             <label for="name">Nama Koleksi</label>
-                            <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ $collection->name }}">
+                            <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}">
                             @error('name')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -46,7 +48,7 @@
                         </div>
                         <div class="form-group">
                             <label for="description">Deskripsi Koleksi</label>
-                            <textarea name="description" id="" cols="30" rows="5" class="form-control @error('description') is-invalid @enderror">{{ $collection->description }}</textarea>
+                            <textarea name="description" id="" cols="30" rows="5" class="form-control @error('description') is-invalid @enderror">{{ old('description') }}</textarea>
                             @error('description')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
