@@ -86,12 +86,14 @@ class ResourceController extends Controller
 
         // olah gambar dan file
         $file = $request->file('file');
+        $image = $request->file('image');
+
         $fileExt = $file->getClientOriginalExtension();
         $fileName = 'resource_' . $current_id . '.' . $fileExt;
         $tujuan_file = $this->path_resource_file;
         $file->move($tujuan_file,$fileName);
 
-        $image = $request->file('image');
+        
         $imageExt = $image->getClientOriginalExtension();
         $imageName = 'image_' . $current_id . '.' . $imageExt;
         $tujuan_image = $this->path_resource_image;

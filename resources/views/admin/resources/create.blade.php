@@ -64,7 +64,7 @@
                             <select name="type_id" class="form-control @error('type_id') is-invalid @enderror">
                                 <option value=""></option>
                                 <option value="1">Pdf</option>
-                                <option value="2">Power Point</option>
+                                <option value="2">Video</option>
                             </select>
                             @error('type_id')
                             <span class="invalid-feedback" role="alert">
