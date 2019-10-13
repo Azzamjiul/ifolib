@@ -7,7 +7,7 @@
             <div class="card">
                 <div class="card-header">
                     <h3 style="display:inline-block">Menambah Resource</h3>
-                    <a href="{{route('admin.oer.resource.index')}}" class="float-right btn btn-warning btn-sm">Kembali</a>
+                    <a href="{{route('member.oer.resource.index')}}" class="float-right btn btn-warning btn-sm">Kembali</a>
                 </div>
 
                 <div class="card-body">
@@ -17,7 +17,7 @@
                     </div>
                     @endif
 
-                    <form action="{{ route('admin.oer.resource.store') }}" method="post" enctype="multipart/form-data">
+                    <form action="{{ route('member.oer.resource.store') }}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group">
                             <label for="title">Judul Resource</label>
@@ -63,7 +63,7 @@
                             <label for="type_id">Type</label>
                             <select name="type_id" class="form-control @error('type_id') is-invalid @enderror">
                                 <option value=""></option>
-                                <option value="1">PDF</option>
+                                <option value="1">Pdf</option>
                                 <option value="2">Power Point</option>
                             </select>
                             @error('type_id')

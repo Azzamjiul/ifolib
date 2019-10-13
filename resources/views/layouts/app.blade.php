@@ -49,6 +49,10 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('admin.oer.resource.index') }}">{{ __('Resources') }}</a>
                         </li>
+                        @elseif(Auth::user()->type==2)
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('member.oer.resource.index') }}">{{ __('Resources') }}</a>
+                        </li>
                         @endguest
                     </ul>
 

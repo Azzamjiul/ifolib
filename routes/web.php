@@ -11,12 +11,13 @@
 |
 */
 
+Auth::routes(['verify' => true]);
+
 Route::get('/', function () {
     return view('front_end.home');
 });
-
-Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home')->middleware('administrator');
+Route::get('/clickwkwk/{request}', 'HomeController@clickLink');
 
 /**
  * Open Education Resource
@@ -48,5 +49,15 @@ Route::prefix('oer')->group(function () {
      */
     Route::prefix('member')->name('member.oer.')->middleware('auth')->group(function () {
         Route::get('', 'Oer\MemberController@dashboard')->name('dashboard');
+
+        /**
+         * Resource CRUD
+         */
+        Route::get('resource', 'Oer\MemberController@resource_list')->name('resource.index');
+        Route::get('resource/create', 'Oer\MemberController@resource_create')->name('resource.create');
+        Route::post('resource', 'Oer\MemberController@resource_store')->name('resource.store');
+        Route::get('resource/{id}/edit', 'Oer\MemberController@resource_edit')->name('resource.edit');
+        Route::post('resource/{id}', 'Oer\MemberController@resource_update')->name('resource.update');
+        Route::get('resource/{id}/delete', 'Oer\MemberController@resource_delete')->name('resource.delete');
     });
 });

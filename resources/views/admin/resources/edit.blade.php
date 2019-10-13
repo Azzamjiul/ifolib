@@ -17,11 +17,12 @@
                     </div>
                     @endif
 
-                    <form action="{{ route('admin.oer.resource.store') }}" method="post">
+                    <form action="{{ route('admin.oer.resource.update', $resource->id) }}" method="post">
                         @csrf
+                        @method('PUT')
                         <div class="form-group">
                             <label for="title">Judul Resource</label>
-                            <input type="text" name="title" class="form-control @error('title') is-invalid @enderror" value="{{ old('title') }}">
+                            <input type="text" name="title" class="form-control @error('title') is-invalid @enderror" value="{{ $resource->title }}">
                             @error('title')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -32,9 +33,8 @@
                         <div class="form-group">
                             <label for="subject_id">Mata Pelajaran</label>
                             <select name="subject_id" class="form-control @error('subject_id') is-invalid @enderror">
-                                <option value="1">wkwk</option>
                                 @foreach($subjects as $subject)
-                                    <option value="{{$subject->id}}">{{$subject->name}}</option>
+                                <option value="{{$subject->id}}" {{ $resource->subject_id == $subject->id ? 'selected' : '' }} >{{$subject->name}}</option>
                                 @endforeach
                             </select>
                             @error('subject_id')
@@ -45,112 +45,10 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="description">Deskripsi Resource</label>
-                            <textarea name="description" id="" cols="30" rows="5" class="form-control @error('description') is-invalid @enderror">{{ old('description') }}</textarea>
-                            @error('description')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
-
-                        <div class="form-group">
-                            <label for="creator">Creator</label>
-                            <input type="text" name="creator" class="form-control @error('creator') is-invalid @enderror" value="{{ old('creator') }}">
-                            @error('creator')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
-
-                        <div class="form-group">
-                            <label for="source">Source</label>
-                            <input type="text" name="source" class="form-control @error('source') is-invalid @enderror" value="{{ old('source') }}">
-                            @error('source')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
-
-                        <div class="form-group">
-                            <label for="publisher">Publisher</label>
-                            <input type="text" name="publisher" class="form-control @error('publisher') is-invalid @enderror" value="{{ old('publisher') }}">
-                            @error('publisher')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
-
-                        <div class="form-group">
-                            <label for="rights">Rights</label>
-                            <input type="text" name="rights" class="form-control @error('rights') is-invalid @enderror" value="{{ old('rights') }}">
-                            @error('rights')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
-
-                        <div class="form-group">
-                            <label for="format">Format</label>
-                            <input type="text" name="format" class="form-control @error('format') is-invalid @enderror" value="{{ old('format') }}">
-                            @error('format')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
-
-                        <div class="form-group">
-                            <label for="language">Language</label>
-                            <input type="text" name="language" class="form-control @error('language') is-invalid @enderror" value="{{ old('language') }}">
-                            @error('language')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
-
-                        <div class="form-group">
-                            <label for="type_id">Type</label>
-                            <select name="type_id" class="form-control @error('type_id') is-invalid @enderror">
-                                <option value="">Pdf</option>
-                            </select>
-                            @error('type_id')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
-
-                        <div class="form-group">
-                            <label for="file">File</label>
-                            <input type="text" name="file" class="form-control @error('file') is-invalid @enderror" value="{{ old('file') }}">
-                            @error('file')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
-
-                        <div class="form-group">
-                            <label for="image">Foto Sampul</label>
-                            <input type="text" name="image" class="form-control @error('image') is-invalid @enderror" value="{{ old('image') }}">
-                            @error('image')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
-
-                        <div class="form-group">
                             <label for="collection_id">Collections</label>
                             <select name="collection_id" class="form-control @error('collection_id') is-invalid @enderror">
-                                @foreach($subjects as $subject)
-                                    <option value="{{$subject->id}}">{{$subject->name}}</option>
+                                @foreach($collections as $c)
+                                <option value="{{$c->id}}" {{ $c->id == $resource->collection_id ? 'selected' : '' }}>{{$c->name}}</option>
                                 @endforeach
                             </select>
                             @error('collection_id')
@@ -160,7 +58,111 @@
                             @enderror
                         </div>
 
-                        <button type="submit" class="float-right btn btn-primary">Simpan</button>
+                        <div class="form-group">
+                            <label for="type_id">Type</label>
+                            <select name="type_id" class="form-control @error('type_id') is-invalid @enderror">
+                                <option value=""></option>
+                                <option value="1" {{ $resource->type_id == 1 ? 'selected' : '' }} >PDF</option>
+                                <option value="2" {{ $resource->type_id == 2 ? 'selected' : '' }} >Power Point</option>
+                            </select>
+                            @error('type_id')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
+                            <label for="description">Deskripsi Resource</label>
+                            <textarea name="description" id="" cols="30" rows="5" class="form-control @error('description') is-invalid @enderror">{{ $resource->description }}</textarea>
+                            @error('description')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
+                            <label for="creator">Creator</label>
+                            <input type="text" name="creator" class="form-control @error('creator') is-invalid @enderror" value="{{ $resource->creator }}">
+                            @error('creator')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
+                            <label for="source">Source</label>
+                            <input type="text" name="source" class="form-control @error('source') is-invalid @enderror" value="{{ $resource->source }}">
+                            @error('source')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
+                            <label for="publisher">Publisher</label>
+                            <input type="text" name="publisher" class="form-control @error('publisher') is-invalid @enderror" value="{{ $resource->publisher }}">
+                            @error('publisher')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
+                            <label for="rights">Rights</label>
+                            <input type="text" name="rights" class="form-control @error('rights') is-invalid @enderror" value="{{ $resource->rights }}">
+                            @error('rights')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
+                            <label for="format">Format</label>
+                            <input type="text" name="format" class="form-control @error('format') is-invalid @enderror" value="{{ $resource->format }}">
+                            @error('format')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
+                            <label for="language">Language</label>
+                            <input type="text" name="language" class="form-control @error('language') is-invalid @enderror" value="{{ $resource->language }}">
+                            @error('language')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
+                            <label for="file">File</label><br>
+                            <input type="file" name="file" class=" @error('file') is-invalid @enderror" value="{{ $resource->file }}">
+                            @error('file')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
+                            <label for="image">Foto Sampul</label><br>
+                            <input type="file" name="image" class=" @error('image') is-invalid @enderror" value="{{ $resource->image }}">
+                            @error('image')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+
+                        <button type="submit" class="float-right btn btn-primary">Update</button>
                     </form>
                 </div>
             </div>
