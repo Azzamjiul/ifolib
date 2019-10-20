@@ -113,6 +113,7 @@
 		</div>
 	</section>
 
+	<!-- Recent News -->
 	<section class="section bg-color-light border-0 my-0">
 		<div class="container">
 			<div class="row">

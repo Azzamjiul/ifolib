@@ -11,23 +11,30 @@
 |
 */
 
+Auth::routes(['verify' => true]);
+
 Route::get('/', function () {
     return view('front_end.home');
 });
+Route::get('/home', 'HomeController@index')->name('home')->middleware('administrator');
+Route::get('/clickwkwk/{request}', 'HomeController@clickLink');
 
-Auth::routes();
-Route::get('/home', 'HomeController@index')->name('home');
-
-// oer
+/**
+ * Open Education Resource
+ */
 Route::prefix('oer')->group(function () {
-    // front end
-    Route::name('oer.')->group(function(){
-        Route::get('', 'Oer\OerController@index')->name('index');
-        Route::get('search', 'Oer\OerController@search')->name('search');
-        Route::get('show/{id}', 'Oer\OerController@show')->name('show');
-    });
-    // admin
-    Route::prefix('admin')->name('admin.oer.')->middleware('auth')->group(function () {
+    /**
+     * OER Front-End
+     */
+    Route::get('', 'Oer\OerController@index')->name('oer.index');
+    Route::get('search', 'Oer\OerController@search')->name('oer.search');
+    Route::get('resources/{id}', 'Oer\OerController@resources_show')->name('oer.resources.show');
+    Route::get('resources/{id}/view', 'Oer\OerController@resources_view')->name('oer.resources.view')->middleware('auth');
+
+    /**
+     * OER Administrator
+     */
+    Route::prefix('admin')->name('admin.oer.')->middleware('administrator')->group(function () {
         Route::get('', 'Oer\OerController@dashboard')->name('dashboard');
         Route::resource('koleksi', 'Oer\CollectionController');
         Route::get('koleksi/{id}/delete', 'Oer\CollectionController@delete')->name('koleksi.delete');
@@ -36,8 +43,21 @@ Route::prefix('oer')->group(function () {
         Route::resource('resource', 'Oer\ResourceController');
         Route::get('resource/{id}/delete', 'Oer\ResourceController@delete')->name('resource.delete');
     });
-});
 
-Route::get('article', 'ArticleController@index');
-Route::get('article/{tag}', 'ArticleController@cari');
-Route::post('article', 'ArticleController@store');
+    /**
+     * OER Member
+     */
+    Route::prefix('member')->name('member.oer.')->middleware('auth')->group(function () {
+        Route::get('', 'Oer\MemberController@dashboard')->name('dashboard');
+
+        /**
+         * Resource CRUD
+         */
+        Route::get('resource', 'Oer\MemberController@resource_list')->name('resource.index');
+        Route::get('resource/create', 'Oer\MemberController@resource_create')->name('resource.create');
+        Route::post('resource', 'Oer\MemberController@resource_store')->name('resource.store');
+        Route::get('resource/{id}/edit', 'Oer\MemberController@resource_edit')->name('resource.edit');
+        Route::post('resource/{id}', 'Oer\MemberController@resource_update')->name('resource.update');
+        Route::get('resource/{id}/delete', 'Oer\MemberController@resource_delete')->name('resource.delete');
+    });
+});

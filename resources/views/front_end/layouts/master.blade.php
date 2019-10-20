@@ -85,14 +85,28 @@
 							<div class="header-column justify-content-end">
 								<div class="header-row">
 									<nav class="header-nav-top">
+										@guest
 										<ul class="nav nav-pills">
 											<li class="nav-item nav-item-borders py-2 d-none d-lg-inline-flex">
-												<a href="/login" class="text-light"><i class="far fa-user p-relative" style="top: 0;"></i> Login</a>
+												<a href="/login" class="text-light"><i class="icon-login icons p-relative" style="top: 0;"></i> Login</a>
 											</li>
 											<li class="nav-item nav-item-borders py-2 pr-0 dropdown">
 												<a href="/register" class="text-light pr-0"><i class="fas fa-pencil-alt"></i> Register</a>
 											</li>
 										</ul>
+										@else
+										<ul class="nav nav-pills">
+											<li class="nav-item nav-item-borders py-2 d-none d-lg-inline-flex">
+												<a href="/home" class="text-light"><i class="icon-home icons p-relative" style="top: 0;"></i> Dashboard</a>
+											</li>
+											<li class="nav-item nav-item-borders py-2 pr-0 dropdown">
+												<a href="/logout" class="text-light pr-0" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="icon-logout icons"></i> Logout</a>
+												<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+													@csrf
+												</form>
+											</li>
+										</ul>
+										@endguest
 									</nav>
 								</div>
 							</div>

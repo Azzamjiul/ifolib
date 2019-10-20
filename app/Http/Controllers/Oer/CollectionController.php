@@ -17,7 +17,7 @@ class CollectionController extends Controller
     {
         $collections = Collection::orderBy('code', 'ASC')->get();
         // return $collections;
-        return view('admin.koleksi.index',compact('collections'));
+        return view('admin.collection.index',compact('collections'));
     }
 
     /**
@@ -27,7 +27,8 @@ class CollectionController extends Controller
      */
     public function create()
     {
-        return view('admin.koleksi.create');
+        $collections = Collection::all();
+        return view('admin.collection.create', compact('collections'));
     }
 
     /**
@@ -75,7 +76,8 @@ class CollectionController extends Controller
     public function edit($id)
     {
         $collection = Collection::find($id);
-        return view('admin.koleksi.edit', compact('collection'));
+        $collections = Collection::all();
+        return view('admin.collection.edit', compact('collection','collections'));
     }
 
     /**

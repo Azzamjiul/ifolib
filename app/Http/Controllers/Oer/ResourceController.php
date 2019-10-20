@@ -10,6 +10,7 @@ use App\Subject;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use File;
+use Illuminate\Support\Facades\DB;
 
 class ResourceController extends Controller
 {
@@ -37,7 +38,8 @@ class ResourceController extends Controller
     public function create()
     {
         $subjects = Subject::all();
-        return view('admin.resources.create', compact('subjects'));
+        $collections = Collection::all();
+        return view('admin.resources.create', compact('subjects','collections'));
     }
 
     /**
@@ -48,8 +50,9 @@ class ResourceController extends Controller
      */
     public function store(Request $request)
     {
-        // return $request;
-        // melakukan validasi
+        /**
+         * melakukan validasi
+         */
         $this->validate($request, [
             'title',
             'type',
@@ -59,53 +62,59 @@ class ResourceController extends Controller
             'image' => 'required'
         ]);
 
-        // simpan tanpa gambar dan file
-        $resource = Resource::create([
-            'title' => $request->title,
-            'subject_id'    =>  $request->subject_id,
-            'description'   =>  $request->description,
-            'creator'   => $request->creator,
-            'source'    => $request->source,
-            'publisher' => $request->publisher,
-            'date'  => Carbon::now(),
-            'contributor_id'    => Auth::user()->id,
-            'rights'    => $request->rights,
-            'format'    => $request->format,
-            'language'  => $request->language,
-            'type_id'   => $request->type_id,
-            'file'      => null,
-            'image'     => null,
-            'collection_id' => $request->collection_id,
-            'citation'  => null
-        ]);
+        DB::beginTransaction();
+        try {
+             // simpan tanpa gambar dan file
+            $resource = Resource::create([
+                'title' => $request->title,
+                'subject_id'    =>  $request->subject_id,
+                'description'   =>  $request->description,
+                'creator'   => $request->creator,
+                'source'    => $request->source,
+                'publisher' => $request->publisher,
+                'date'  => Carbon::now(),
+                'contributor_id'    => Auth::user()->id,
+                'rights'    => $request->rights,
+                'format'    => $request->format,
+                'language'  => $request->language,
+                'type_id'   => $request->type_id,
+                'file'      => null,
+                'image'     => null,
+                'collection_id' => $request->collection_id,
+                'citation'  => null
+            ]);
 
-        $current_id = $resource->id;
-        // return $current_id;
+            $current_id = $resource->id;
 
-        // olah gambar dan file
-        $file = $request->file('file');
-        $fileExt = $file->getClientOriginalExtension();
-        $fileName = 'resource_' . $current_id . '.' . $fileExt;
-        $tujuan_file = $this->path_resource_file;
-        $file->move($tujuan_file, $fileName);
-
-        $image = $request->file('image');
-        $imageExt = $image->getClientOriginalExtension();
-        $imageName = 'image_' . $current_id . '.' . $imageExt;
-        $tujuan_image = $this->path_resource_image;
-        $image->move($tujuan_image, $imageName);
-
-
-        // update dengan gambar dan file
-        $resource_2 = Resource::find($current_id);
-
-        $resource_2->update([
-            'file'  =>  $fileName,
-            'image' =>  $imageName
-        ]);
-        $resource->save();
-
-        return redirect()->route('admin.oer.resource.index')->with('status', 'Resource Berhasil ditambahkan');
+            // olah gambar dan file
+            $file = $request->file('file');
+            if($file != NULL){
+                $fileExt = $file->getClientOriginalExtension();
+                $fileName = 'resource_' . $current_id . '.' . $fileExt;
+                $tujuan_file = $this->path_resource_file;
+                $file->move($tujuan_file,$fileName);
+                
+                $image = $request->file('image');
+                $imageExt = $image->getClientOriginalExtension();
+                $imageName = 'image_' . $current_id . '.' . $imageExt;
+                $tujuan_image = $this->path_resource_image;
+                $image->move($tujuan_image,$imageName);
+                   
+                // update dengan gambar dan file
+                $resource_2 = Resource::find($current_id);
+                
+                $resource_2->update([
+                    'file'  =>  $fileName,
+                    'image' =>  $imageName
+                ]);
+                $resource->save();
+            }
+            DB::commit();
+            return redirect()->route('admin.oer.resource.index')->with('status','Resource berhasil ditambahkan');
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return redirect()->route('admin.oer.resource.index')->with('status','Resource gagal ditambahkan');
+        }
     }
 
     /**
@@ -130,7 +139,7 @@ class ResourceController extends Controller
         $subjects = Subject::all();
         $collections = Collection::all();
         $resource = Resource::find($id);
-        return view('admin.resources.edit', compact('resource', 'subjects', 'collections'));
+        return view('admin.resources.edit', compact('resource','subjects','collections'));
     }
 
     /**
@@ -142,26 +151,67 @@ class ResourceController extends Controller
      */
     public function update(Request $request, $id)
     {
-        return $id;
-        $resource = Resource::find($id);
-        $resource->update([
-            'title'             => $request->title,
-            'subject_id'        =>  $request->subject_id,
-            'description'       =>  $request->description,
-            'creator'           => $request->creator,
-            'source'            => $request->source,
-            'publisher'          => $request->publisher,
-            'date'              => Carbon::now(),
-            'contributor_id'    => Auth::user()->id,
-            'rights'            => $request->rights,
-            'format'            => $request->format,
-            'language'          => $request->language,
-            'type_id'           => $request->type_id,
-            'file'              => null,
-            'image'             => null,
-            'collection_id'     => $request->collection_id,
-            'citation'          => null
+        // return $request;
+        /**
+         * melakukan validasi
+         */
+        $this->validate($request, [
+            'title',
+            'type',
+            'creator',
+            'format',
+            'file' => '',
+            'image' => ''
         ]);
+
+        DB::beginTransaction();
+        try {
+            $resource = Resource::find($id);
+             // simpan tanpa gambar dan file
+            $resource->update([
+                'title' => $request->title,
+                'subject_id'    =>  $request->subject_id,
+                'description'   =>  $request->description,
+                'creator'   => $request->creator,
+                'source'    => $request->source,
+                'publisher' => $request->publisher,
+                'date'  => Carbon::now(),
+                'contributor_id'    => Auth::user()->id,
+                'rights'    => $request->rights,
+                'format'    => $request->format,
+                'language'  => $request->language,
+                'type_id'   => $request->type_id,
+                'collection_id' => $request->collection_id,
+                'citation'  => null
+            ]);
+            $resource->save();
+
+            // olah gambar dan file
+            $file = $request->file('file');
+            if($file != NULL){
+                $fileExt = $file->getClientOriginalExtension();
+                $fileName = 'resource_' . $id . '.' . $fileExt;
+                $tujuan_file = $this->path_resource_file;
+                $file->move($tujuan_file,$fileName);
+                
+                $image = $request->file('image');
+                $imageExt = $image->getClientOriginalExtension();
+                $imageName = 'image_' . $id . '.' . $imageExt;
+                $tujuan_image = $this->path_resource_image;
+                $image->move($tujuan_image,$imageName);
+                
+                $resource->update([
+                    'file'  =>  $fileName,
+                    'image' =>  $imageName
+                ]);
+                $resource->save();
+            }
+            DB::commit();
+            return redirect()->route('admin.oer.resource.index')->with('status','Resource berhasil diupdate');
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return redirect()->route('admin.oer.resource.index')->with('status','Resource gagal diupdate');
+        }
     }
 
     /**

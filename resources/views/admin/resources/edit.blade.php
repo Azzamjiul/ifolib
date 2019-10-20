@@ -17,7 +17,7 @@
                     </div>
                     @endif
 
-                    <form action="{{ route('admin.oer.resource.update', $resource->id) }}" method="post" enctype="multipart/form-data">
+                    <form action="{{ route('admin.oer.resource.update', $resource->id) }}" method="post">
                         @csrf
                         @method('PUT')
                         <div class="form-group">
@@ -48,10 +48,38 @@
                             <label for="subject_id">Mata Pelajaran</label>
                             <select name="subject_id" class="form-control @error('subject_id') is-invalid @enderror">
                                 @foreach($subjects as $subject)
-                                    <option value="{{$subject->id}}" {{ $subject->id == $resource->subject_id ? 'selected' : '' }}>{{$subject->name}}</option>
+                                <option value="{{$subject->id}}" {{ $resource->subject_id == $subject->id ? 'selected' : '' }} >{{$subject->name}}</option>
                                 @endforeach
                             </select>
                             @error('subject_id')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
+                            <label for="collection_id">Collections</label>
+                            <select name="collection_id" class="form-control @error('collection_id') is-invalid @enderror">
+                                @foreach($collections as $c)
+                                <option value="{{$c->id}}" {{ $c->id == $resource->collection_id ? 'selected' : '' }}>{{$c->name}}</option>
+                                @endforeach
+                            </select>
+                            @error('collection_id')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
+                            <label for="type_id">Type</label>
+                            <select name="type_id" class="form-control @error('type_id') is-invalid @enderror">
+                                <option value=""></option>
+                                <option value="1" {{ $resource->type_id == 1 ? 'selected' : '' }} >PDF</option>
+                                <option value="2" {{ $resource->type_id == 2 ? 'selected' : '' }} >Power Point</option>
+                            </select>
+                            @error('type_id')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
@@ -129,21 +157,8 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="type_id">Type</label>
-                            <select name="type_id" class="form-control @error('type_id') is-invalid @enderror">
-                                <option value="">Ebook</option>
-                                <option value="">PPT</option>
-                            </select>
-                            @error('type_id')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
-
-                        <div class="form-group">
-                            <label for="file">File</label>
-                            <input type="text" name="file" class="form-control @error('file') is-invalid @enderror" value="{{ old('file') }}">
+                            <label for="file">File</label><br>
+                            <input type="file" name="file" class=" @error('file') is-invalid @enderror" value="{{ $resource->file }}">
                             @error('file')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -152,8 +167,8 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="image">Foto Sampul</label>
-                            <input type="text" name="image" class="form-control @error('image') is-invalid @enderror" value="{{ old('image') }}">
+                            <label for="image">Foto Sampul</label><br>
+                            <input type="file" name="image" class=" @error('image') is-invalid @enderror" value="{{ $resource->image }}">
                             @error('image')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -161,7 +176,7 @@
                             @enderror
                         </div>
 
-                        <button type="submit" class="float-right btn btn-primary">Simpan</button>
+                        <button type="submit" class="float-right btn btn-primary">Update</button>
                     </form>
                 </div>
             </div>

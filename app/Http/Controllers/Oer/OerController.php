@@ -2,16 +2,14 @@
 
 namespace App\Http\Controllers\Oer;
 
+use App\Resource;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Resource;
 
 class OerController extends Controller
 {
-    public function index()
-    {
-        $items = DB::table('resources')->get();
-        return view('front_end.oer.index', compact('items'));
+    public function index(){
+        return view('front_end.oer.index');
     }
 
     public function search(Request $request)
@@ -22,8 +20,9 @@ class OerController extends Controller
                 ->orWhere('description', 'like', "%{$request->keyword}%")
                 ->orWhere('creator', 'like', "%{$request->keyword}%")
                 ->orWhere('publisher', 'like', "%{$request->keyword}%");
-        })->get();
-        return view('front_end.oer.search_results', compact('items', 'request'));
+         })->get();
+         $keyword = $request->keyword;
+         return view('front_end.oer.search_results', compact('items', 'keyword'));
     }
 
     public function dashboard()
@@ -31,9 +30,15 @@ class OerController extends Controller
         return view('admin.dashboard.index');
     }
 
-    public function show($id){
-        // return view('front_end.oer.resource_detail');
+    public function resources_show($id)
+    {
         $resource = Resource::find($id);
-        return view('front_end.oer.resource_detail', compact('resource'));
+        return view('front_end.oer.resources_show', compact('resource'));
+    }
+
+    public function resources_view($id){
+        $resource = Resource::find($id);
+        $pathToFile = public_path('oer_upload/resource_file') . "/" .$resource->file;
+        return response()->file($pathToFile);
     }
 }

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -13,7 +15,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware(['auth', 'verified']);
     }
 
     /**
@@ -24,5 +26,16 @@ class HomeController extends Controller
     public function index()
     {
         return view('home');
+    }
+
+    public function clickLink($request)
+    {
+        return $request;
+        DB::table('logs')->insert([
+            'link' => $request,
+            'user_id' => isset(Auth::user()->id) ? Auth::user()->id : NULL
+        ]);
+        // return $request;
+        return redirect()->away($request);
     }
 }
