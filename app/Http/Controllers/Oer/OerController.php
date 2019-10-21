@@ -9,7 +9,8 @@ use App\Http\Controllers\Controller;
 class OerController extends Controller
 {
     public function index(){
-        return view('front_end.oer.index');
+        $items = Resource::take(5)->get();
+        return view('front_end.oer.index', compact('items'));
     }
 
     public function search(Request $request)

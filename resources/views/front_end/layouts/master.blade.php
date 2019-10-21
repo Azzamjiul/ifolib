@@ -176,9 +176,9 @@
 													<a class="nav-link" href="{{ route('oer.index') }}">
 															Open Education Resources
 													</a>
-													<a class="nav-link" href="{{ route('oer.classification') }}">
+													<!-- <a class="nav-link" href="{{ route('oer.classification') }}">
 															Classification
-													</a>
+													</a> -->
 												</div>
 										</div>
 									</div>
