@@ -27,6 +27,7 @@ Route::prefix('oer')->group(function () {
      * OER Front-End
      */
     Route::get('', 'Oer\OerController@index')->name('oer.index');
+    Route::get('Classification', 'Oer\OerController@classification')->name('oer.classification');
     Route::get('search', 'Oer\OerController@search')->name('oer.search');
     Route::get('resources/{id}', 'Oer\OerController@resources_show')->name('oer.resources.show');
     Route::get('resources/{id}/view', 'Oer\OerController@resources_view')->name('oer.resources.view')->middleware('auth');

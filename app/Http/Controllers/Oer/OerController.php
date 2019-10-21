@@ -33,12 +33,21 @@ class OerController extends Controller
     public function resources_show($id)
     {
         $resource = Resource::find($id);
-        return view('front_end.oer.resources_show', compact('resource'));
+        if($resource->type_id == 1){
+            return view('front_end.oer.resources_show', compact('resource'));
+        }
+        else if($resource->type_id == 2){
+            return view('front_end.oer.resources_show_video', compact('resource'));
+        }
     }
 
     public function resources_view($id){
         $resource = Resource::find($id);
         $pathToFile = public_path('oer_upload/resource_file') . "/" .$resource->file;
         return response()->file($pathToFile);
+    }
+
+    public function classification(){
+        return view('front_end.oer.classification');
     }
 }

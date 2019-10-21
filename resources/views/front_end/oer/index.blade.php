@@ -17,6 +17,17 @@
                 </ul>
             </div>
         </div>
+        <br>
+        <form role="search" action="{{ route('oer.search') }}" method="get">
+                <div class="simple-search input-group">
+                    <input class="form-control text-1" id="headerSearch" name="keyword" type="search" value="" placeholder="Search...">
+                    <span class="input-group-append">
+                        <button class="btn" type="submit">
+                            <i class="fa fa-search header-nav-top-icon"></i>
+                        </button>
+                    </span>
+                </div>
+        </form>
     </div>
 </section>
 
@@ -25,7 +36,7 @@
         <div class="row justify-content-center">
             <div class="col-md-10 text-center">
                 <h2 class="font-weight-bold mb-4 appear-animation" data-appear-animation="fadeInUpShorter" data-appear-animation-delay="1500">Selamat Datang</h2>
-                <p class="text-color-dark pb-3 mb-4 appear-animation" data-appear-animation="fadeInUpShorter" data-appear-animation-delay="1700">Portal Open Educational Resource (OER) Informatika Institut Teknologi Sepuluh Nopember merupakan kumpulan buku digital berlisensi Creative Commons yang dikumpulkan dari berbagai sumber untuk mendukung perkembangan ilmu kepengetahuan.</p>
+                 <p class="text-color-dark pb-3 mb-4 appear-animation" data-appear-animation="fadeInUpShorter" data-appear-animation-delay="1700">Portal Open Educational Resource (OER) Informatika Institut Teknologi Sepuluh Nopember merupakan kumpulan buku digital berlisensi Creative Commons yang dikumpulkan dari berbagai sumber untuk mendukung perkembangan ilmu kepengetahuan.</p>
             </div>
         </div>
     </div>
@@ -34,17 +45,7 @@
 <section class="section bg-color-tertiary border-0 my-0 pb-4">
     <div class="container">
 
-        <form role="search" action="{{ route('oer.search') }}" method="get">
-            <div class="simple-search input-group">
-                <input class="form-control text-1" id="headerSearch" name="keyword" type="search" value="" placeholder="Search...">
-                <span class="input-group-append">
-                    <button class="btn" type="submit">
-                        <i class="fa fa-search header-nav-top-icon"></i>
-                    </button>
-                </span>
-            </div>
-        </form>
-
+        
         <br><br>
 
         <div class="row justify-content-center mb-5">
