@@ -22,7 +22,7 @@
                         @method('PUT')
                         <div class="form-group">
                             <label for="">Kategori Induk</label>
-                            <select name="parent_id" id="" class="form-control">
+                            <select name="parent_id" id="" required class="form-control">
                                 <option value="0">Induk</option>
                                 @foreach($collections as $c)
                                 <option value="{{$c->id}}" {{ $c->id == $collection->parent_id ? 'selected' : '' }} >{{$c->code}} - {{$c->name}}</option>
@@ -31,7 +31,7 @@
                         </div>
                         <div class="form-group">
                             <label for="code">Nomor Koleksi</label>
-                            <input type="text" name="code" class="form-control @error('code') is-invalid @enderror" value="{{ $collection->code }}">
+                            <input type="text" name="code" required class="form-control @error('code') is-invalid @enderror" value="{{ $collection->code }}">
                             @error('code')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -40,7 +40,7 @@
                         </div>
                         <div class="form-group">
                             <label for="name">Nama Koleksi</label>
-                            <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ $collection->name }}">
+                            <input type="text" name="name" required class="form-control @error('name') is-invalid @enderror" value="{{ $collection->name }}">
                             @error('name')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -49,7 +49,7 @@
                         </div>
                         <div class="form-group">
                             <label for="description">Deskripsi Koleksi</label>
-                            <textarea name="description" id="" cols="30" rows="5" class="form-control @error('description') is-invalid @enderror">{{ $collection->description }}</textarea>
+                            <textarea name="description" id="" cols="30" rows="5" required class="form-control @error('description') is-invalid @enderror">{{ $collection->description }}</textarea>
                             @error('description')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>

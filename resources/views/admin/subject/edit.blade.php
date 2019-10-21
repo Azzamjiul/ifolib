@@ -22,7 +22,7 @@
                         @method('PUT')
                         <div class="form-group">
                             <label for="name">Nama Mata Pelajaran</label>
-                            <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" value="{{ $subject->name }}">
+                            <input type="text" name="name" required class="form-control @error('name') is-invalid @enderror" value="{{ $subject->name }}">
                             @error('name')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>

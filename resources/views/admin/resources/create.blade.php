@@ -21,7 +21,7 @@
                         @csrf
                         <div class="form-group">
                             <label for="title">Judul Resource</label>
-                            <input type="text" name="title" class="form-control @error('title') is-invalid @enderror" value="{{ old('title') }}">
+                            <input type="text" name="title" required class="form-control @error('title') is-invalid @enderror" value="{{ old('title') }}">
                             @error('title')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -31,7 +31,7 @@
 
                         <div class="form-group">
                             <label for="subject_id">Mata Pelajaran</label>
-                            <select name="subject_id" class="form-control @error('subject_id') is-invalid @enderror">
+                            <select name="subject_id" required class="form-control @error('subject_id') is-invalid @enderror">
                                 <option value="">Pilih Mata Pelajaran</option>
                                 @foreach($subjects as $subject)
                                 <option value="{{$subject->id}}">{{$subject->name}}</option>
@@ -46,7 +46,7 @@
 
                         <div class="form-group">
                             <label for="collection_id">Collections</label>
-                            <select name="collection_id" class="form-control @error('collection_id') is-invalid @enderror">
+                            <select name="collection_id" required class="form-control @error('collection_id') is-invalid @enderror">
                                 <option value="">Pilih Collection</option>
                                 @foreach($collections as $c)
                                     <option value="{{$c->id}}">{{$c->code}} - {{$c->name}}</option>
@@ -61,7 +61,7 @@
 
                         <div class="form-group">
                             <label for="type_id">Type</label>
-                            <select name="type_id" class="form-control @error('type_id') is-invalid @enderror">
+                            <select name="type_id" required class="form-control @error('type_id') is-invalid @enderror">
                                 <option value=""></option>
                                 <option value="1">PDF</option>
                                 <option value="2">Power Point</option>
@@ -75,7 +75,7 @@
 
                         <div class="form-group">
                             <label for="description">Deskripsi Resource</label>
-                            <textarea name="description" id="" cols="30" rows="5" class="form-control @error('description') is-invalid @enderror">{{ old('description') }}</textarea>
+                            <textarea name="description" id="" cols="30" rows="5" required class="form-control @error('description') is-invalid @enderror">{{ old('description') }}</textarea>
                             @error('description')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -85,7 +85,7 @@
 
                         <div class="form-group">
                             <label for="creator">Creator</label>
-                            <input type="text" name="creator" class="form-control @error('creator') is-invalid @enderror" value="{{ old('creator') }}">
+                            <input type="text" name="creator" required class="form-control @error('creator') is-invalid @enderror" value="{{ old('creator') }}">
                             @error('creator')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -95,7 +95,7 @@
 
                         <div class="form-group">
                             <label for="source">Source</label>
-                            <input type="text" name="source" class="form-control @error('source') is-invalid @enderror" value="{{ old('source') }}">
+                            <input type="text" name="source" required class="form-control @error('source') is-invalid @enderror" value="{{ old('source') }}">
                             @error('source')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -105,7 +105,7 @@
 
                         <div class="form-group">
                             <label for="publisher">Publisher</label>
-                            <input type="text" name="publisher" class="form-control @error('publisher') is-invalid @enderror" value="{{ old('publisher') }}">
+                            <input type="text" name="publisher" required class="form-control @error('publisher') is-invalid @enderror" value="{{ old('publisher') }}">
                             @error('publisher')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -115,7 +115,7 @@
 
                         <div class="form-group">
                             <label for="rights">Rights</label>
-                            <input type="text" name="rights" class="form-control @error('rights') is-invalid @enderror" value="{{ old('rights') }}">
+                            <input type="text" name="rights" required class="form-control @error('rights') is-invalid @enderror" value="{{ old('rights') }}">
                             @error('rights')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -125,7 +125,7 @@
 
                         <div class="form-group">
                             <label for="format">Format</label>
-                            <input type="text" name="format" class="form-control @error('format') is-invalid @enderror" value="{{ old('format') }}">
+                            <input type="text" name="format" required class="form-control @error('format') is-invalid @enderror" value="{{ old('format') }}">
                             @error('format')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -135,7 +135,7 @@
 
                         <div class="form-group">
                             <label for="language">Language</label>
-                            <input type="text" name="language" class="form-control @error('language') is-invalid @enderror" value="{{ old('language') }}">
+                            <input type="text" name="language" required class="form-control @error('language') is-invalid @enderror" value="{{ old('language') }}">
                             @error('language')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
